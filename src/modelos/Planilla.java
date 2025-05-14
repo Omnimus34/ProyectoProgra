@@ -17,7 +17,7 @@ public class Planilla {
     public void mostrarEmpleados() {
         System.out.println("\nLista de empleados:");
         for (Empleado empleado : empleados) {
-            System.out.println(empleado);7
+            System.out.println(empleado);
         }
     }
 }
