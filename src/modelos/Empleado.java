@@ -3,9 +3,9 @@ package modelos;
 import java.util.Scanner;
 
 public class Empleado {
-    private String nombre;
-    private int edad;
-    private double salario;
+    private final String nombre;
+    private final int edad;
+    private final double salario;
 
     public Empleado(String nombre, int edad, double salario) {
         this.nombre = nombre;
@@ -14,18 +14,19 @@ public class Empleado {
     }
 
     public static Empleado crearEmpleadoDesdeConsola() {
-        Scanner scanner = new Scanner(System.in);
+        try (Scanner scanner = new Scanner(System.in)) {
 
-        System.out.print("Ingrese nombre del empleado: ");
-        String nombre = scanner.nextLine();
+            System.out.print("Ingrese nombre del empleado: ");
+            String nombre = scanner.nextLine();
 
-        System.out.print("Ingrese edad del empleado: ");
-        int edad = scanner.nextInt();
+            System.out.print("Ingrese edad del empleado: ");
+            int edad = scanner.nextInt();
 
-        System.out.print("Ingrese salario del empleado: ");
-        double salario = scanner.nextDouble();
+            System.out.print("Ingrese salario del empleado: ");
+            double salario = scanner.nextDouble();
 
-        return new Empleado(nombre, edad, salario);
+            return new Empleado(nombre, edad, salario);
+        }
     }
 
     public String getNombre() { return nombre; }

@@ -20,4 +20,8 @@ public class Planilla {
             System.out.println(empleado);
         }
     }
+
+    public Iterable<Empleado> getEmpleados() {
+        return empleados;
+    }
 }

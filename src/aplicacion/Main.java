@@ -2,25 +2,23 @@ package aplicacion;
 
 import modelos.Empleado;
 import modelos.Planilla;
+import persistencia.PlanillaDAO;
 
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         Planilla planilla = new Planilla();
 
-        System.out.print("¿Cuántos empleados desea agregar? ");
-        int cantidad = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea
-
-        for (int i = 0; i < cantidad; i++) {
-            System.out.println("\nIngresando datos del empleado #" + (i + 1));
-            Empleado nuevoEmpleado = Empleado.crearEmpleadoDesdeConsola();
-            planilla.agregarEmpleado(nuevoEmpleado);
+        // Crear empleados desde consola
+        for (int i = 0; i < 2; i++) {
+            Empleado empleado = Empleado.crearEmpleadoDesdeConsola();
+            planilla.agregarEmpleado(empleado);
         }
 
+        // Mostrar y guardar planilla
         planilla.mostrarEmpleados();
-        scanner.close();
+
+        PlanillaDAO planillaDAO = new PlanillaDAO();
+        planillaDAO.guardarPlanilla(planilla);
     }
 }
