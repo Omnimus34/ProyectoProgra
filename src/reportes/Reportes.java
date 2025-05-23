@@ -1,5 +1,5 @@
 package reportes;
 
-public class Main {
+public class Reportes {
     
 }
