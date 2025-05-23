@@ -47,7 +47,7 @@ public class Main {
         System.out.println("\n==== PLANILLAS ====");
 
         // Insertar nueva planilla
-        Planilla planilla = new Planilla(0, 1, "Mayo 2025", 3500.0, 130.0,
+        Planilla planilla = new Planilla(0, 1, "Mayo", 3500.0, 130.0,
                 10.0, 3450.0, LocalDate.now());
         planillaDAO.insertarPlanilla(planilla);
 
