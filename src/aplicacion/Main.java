@@ -21,6 +21,7 @@ public class Main {
             System.out.println("\n===== MENÚ PRINCIPAL =====");
             System.out.println("1. CRUD Empleados");
             System.out.println("2. CRUD Planillas");
+            System.out.println("3. Reportes");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             int opcion = leerEntero(scanner);
@@ -31,6 +32,9 @@ public class Main {
                     break;
                 case 2:
                     menuPlanillas(planillaService, scanner);
+                    break;
+                case 3:
+                    menuReportes(empleadoService, planillaService, scanner);
                     break;
                 case 0:
                     salir = true;
@@ -193,6 +197,37 @@ public class Main {
                     System.out.print("ID de la planilla a eliminar: ");
                     int idEliminar = leerEntero(scanner);
                     planillaService.eliminarPlanilla(idEliminar);
+                    break;
+                case 0:
+                    volver = true;
+                    break;
+                default:
+                    System.out.println("Opción inválida.");
+            }
+        }
+    }
+
+    private static void menuReportes(EmpleadoService empleadoService, PlanillaService planillaService, Scanner scanner) {
+        boolean volver = false;
+        while (!volver) {
+            System.out.println("\n--- REPORTES ---");
+            System.out.println("1. Total de empleados y planillas");
+            System.out.println("2. Historial de salarios por empleado");
+            System.out.println("0. Volver");
+            System.out.print("Seleccione una opción: ");
+            int op = leerEntero(scanner);
+
+            switch (op) {
+                case 1:
+                    List<Empleado> empleados = empleadoService.listarEmpleados();
+                    List<Planilla> planillas = planillaService.listarPlanillas();
+                    System.out.println("Total empleados: " + empleados.size());
+                    System.out.println("Total planillas: " + planillas.size());
+                    break;
+                case 2:
+                    empleados = empleadoService.listarEmpleados();
+                    planillas = planillaService.listarPlanillas();
+                    Reportes.imprimirHistorialSalarios(empleados, planillas);
                     break;
                 case 0:
                     volver = true;

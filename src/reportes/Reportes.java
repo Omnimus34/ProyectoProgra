@@ -19,4 +19,17 @@ public class Reportes {
             System.out.println(p);
         }
     }
+
+    public static void imprimirHistorialSalarios(List<Empleado> empleados, List<Planilla> planillas) {
+        System.out.println("=== HISTORIAL DE SALARIOS POR EMPLEADO ===");
+        for (Empleado e : empleados) {
+            System.out.println("Empleado: " + e.getNombre() + " " + e.getApellido());
+            for (Planilla p : planillas) {
+                if (p.getIdEmpleado() == e.getIdEmpleado()) {
+                    System.out.println("  Mes: " + p.getMesPagado() + " | Salario Líquido: " + p.getSalarioLiquido());
+                }
+            }
+            System.out.println();
+        }
+    }
 }
