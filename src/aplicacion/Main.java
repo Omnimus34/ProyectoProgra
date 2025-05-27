@@ -1,8 +1,10 @@
 package aplicacion;
-import dao.EmpleadoDAO;
-import dao.PlanillaDAO;
+import servicios.EmpleadoService;
+import servicios.PlanillaService;
 import model.Empleado;
 import model.Planilla;
+import utilidades.Utilidades;
+import reportes.Reportes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,8 +12,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-        PlanillaDAO planillaDAO = new PlanillaDAO();
+        EmpleadoService empleadoService = new EmpleadoService();
+        PlanillaService planillaService = new PlanillaService();
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
 
@@ -21,15 +23,14 @@ public class Main {
             System.out.println("2. CRUD Planillas");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar buffer
+            int opcion = leerEntero(scanner);
 
             switch (opcion) {
                 case 1:
-                    menuEmpleados(empleadoDAO, scanner);
+                    menuEmpleados(empleadoService, scanner);
                     break;
                 case 2:
-                    menuPlanillas(planillaDAO, scanner);
+                    menuPlanillas(planillaService, scanner);
                     break;
                 case 0:
                     salir = true;
@@ -41,7 +42,7 @@ public class Main {
         scanner.close();
     }
 
-    private static void menuEmpleados(EmpleadoDAO empleadoDAO, Scanner scanner) {
+    private static void menuEmpleados(EmpleadoService empleadoService, Scanner scanner) {
         boolean volver = false;
         while (!volver) {
             System.out.println("\n--- CRUD Empleados ---");
@@ -52,8 +53,7 @@ public class Main {
             System.out.println("5. Eliminar empleado");
             System.out.println("0. Volver");
             System.out.print("Seleccione una opción: ");
-            int op = scanner.nextInt();
-            scanner.nextLine();
+            int op = leerEntero(scanner);
 
             switch (op) {
                 case 1:
@@ -65,47 +65,61 @@ public class Main {
                     String direccion = scanner.nextLine();
                     System.out.print("Correo: ");
                     String correo = scanner.nextLine();
+                    if (!Utilidades.esCorreoValido(correo)) {
+                        System.out.println("Correo inválido.");
+                        break;
+                    }
                     System.out.print("Teléfono: ");
                     String telefono = scanner.nextLine();
+                    if (!Utilidades.esTelefonoValido(telefono)) {
+                        System.out.println("Teléfono inválido.");
+                        break;
+                    }
                     System.out.print("Fecha de contratación (YYYY-MM-DD): ");
-                    LocalDate fecha = LocalDate.parse(scanner.nextLine());
+                    String fechaStr = scanner.nextLine();
+                    LocalDate fecha = Utilidades.parseFecha(fechaStr);
+                    if (fecha == null) {
+                        System.out.println("Fecha inválida.");
+                        break;
+                    }
                     System.out.print("Salario base: ");
-                    double salario = scanner.nextDouble();
-                    scanner.nextLine();
+                    double salario = leerDouble(scanner);
                     System.out.print("Estado: ");
                     String estado = scanner.nextLine();
                     Empleado emp = new Empleado(0, nombre, apellido, direccion, correo, telefono, fecha, salario, estado);
-                    empleadoDAO.insertarEmpleado(emp);
+                    empleadoService.crearEmpleado(emp);
                     break;
                 case 2:
-                    List<Empleado> empleados = empleadoDAO.obtenerEmpleados();
-                    empleados.forEach(System.out::println);
+                    List<Empleado> empleados = empleadoService.listarEmpleados();
+                    Reportes.imprimirEmpleados(empleados);
                     break;
                 case 3:
                     System.out.print("ID del empleado: ");
-                    int idBuscar = scanner.nextInt();
-                    scanner.nextLine();
-                    Empleado encontrado = empleadoDAO.buscarEmpleadoPorId(idBuscar);
+                    int idBuscar = leerEntero(scanner);
+                    Empleado encontrado = empleadoService.buscarEmpleadoPorId(idBuscar);
                     System.out.println(encontrado != null ? encontrado : "No encontrado.");
                     break;
                 case 4:
                     System.out.print("ID del empleado a actualizar: ");
-                    int idActualizar = scanner.nextInt();
-                    scanner.nextLine();
-                    Empleado actualizar = empleadoDAO.buscarEmpleadoPorId(idActualizar);
+                    int idActualizar = leerEntero(scanner);
+                    Empleado actualizar = empleadoService.buscarEmpleadoPorId(idActualizar);
                     if (actualizar != null) {
                         System.out.print("Nuevo correo: ");
-                        actualizar.setCorreo(scanner.nextLine());
-                        empleadoDAO.actualizarEmpleado(actualizar);
+                        String nuevoCorreo = scanner.nextLine();
+                        if (!Utilidades.esCorreoValido(nuevoCorreo)) {
+                            System.out.println("Correo inválido.");
+                            break;
+                        }
+                        actualizar.setCorreo(nuevoCorreo);
+                        empleadoService.actualizarEmpleado(actualizar);
                     } else {
                         System.out.println("Empleado no encontrado.");
                     }
                     break;
                 case 5:
                     System.out.print("ID del empleado a eliminar: ");
-                    int idEliminar = scanner.nextInt();
-                    scanner.nextLine();
-                    empleadoDAO.eliminarEmpleado(idEliminar);
+                    int idEliminar = leerEntero(scanner);
+                    empleadoService.eliminarEmpleado(idEliminar);
                     break;
                 case 0:
                     volver = true;
@@ -116,7 +130,7 @@ public class Main {
         }
     }
 
-    private static void menuPlanillas(PlanillaDAO planillaDAO, Scanner scanner) {
+    private static void menuPlanillas(PlanillaService planillaService, Scanner scanner) {
         boolean volver = false;
         while (!volver) {
             System.out.println("\n--- CRUD Planillas ---");
@@ -127,66 +141,87 @@ public class Main {
             System.out.println("5. Eliminar planilla");
             System.out.println("0. Volver");
             System.out.print("Seleccione una opción: ");
-            int op = scanner.nextInt();
-            scanner.nextLine();
+            int op = leerEntero(scanner);
 
             switch (op) {
                 case 1:
                     System.out.print("ID Empleado: ");
-                    int idEmp = scanner.nextInt();
-                    scanner.nextLine();
+                    int idEmp = leerEntero(scanner);
                     System.out.print("Mes pagado: ");
                     String mes = scanner.nextLine();
                     System.out.print("Salario bruto: ");
-                    double bruto = scanner.nextDouble();
+                    double bruto = leerDouble(scanner);
                     System.out.print("Descuento IGSS: ");
-                    double igss = scanner.nextDouble();
+                    double igss = leerDouble(scanner);
                     System.out.print("Horas extras: ");
-                    double horas = scanner.nextDouble();
+                    double horas = leerDouble(scanner);
                     System.out.print("Salario líquido: ");
-                    double liquido = scanner.nextDouble();
-                    scanner.nextLine();
+                    double liquido = leerDouble(scanner);
                     System.out.print("Fecha de pago (YYYY-MM-DD): ");
-                    LocalDate fechaPago = LocalDate.parse(scanner.nextLine());
+                    String fechaPagoStr = scanner.nextLine();
+                    LocalDate fechaPago = Utilidades.parseFecha(fechaPagoStr);
+                    if (fechaPago == null) {
+                        System.out.println("Fecha inválida.");
+                        break;
+                    }
                     Planilla planilla = new Planilla(0, idEmp, mes, bruto, igss, horas, liquido, fechaPago);
-                    planillaDAO.insertarPlanilla(planilla);
+                    planillaService.crearPlanilla(planilla);
                     break;
                 case 2:
-                    List<Planilla> planillas = planillaDAO.obtenerPlanillas();
-                    planillas.forEach(System.out::println);
+                    List<Planilla> planillas = planillaService.listarPlanillas();
+                    Reportes.imprimirPlanillas(planillas);
                     break;
                 case 3:
                     System.out.print("ID de la planilla: ");
-                    int idBuscar = scanner.nextInt();
-                    scanner.nextLine();
-                    Planilla encontrada = planillaDAO.buscarPlanillaPorId(idBuscar);
+                    int idBuscar = leerEntero(scanner);
+                    Planilla encontrada = planillaService.buscarPlanillaPorId(idBuscar);
                     System.out.println(encontrada != null ? encontrada : "No encontrada.");
                     break;
                 case 4:
                     System.out.print("ID de la planilla a actualizar: ");
-                    int idActualizar = scanner.nextInt();
-                    scanner.nextLine();
-                    Planilla actualizar = planillaDAO.buscarPlanillaPorId(idActualizar);
+                    int idActualizar = leerEntero(scanner);
+                    Planilla actualizar = planillaService.buscarPlanillaPorId(idActualizar);
                     if (actualizar != null) {
                         System.out.print("Nuevas horas extras: ");
-                        actualizar.setHorasExtras(scanner.nextDouble());
-                        scanner.nextLine();
-                        planillaDAO.actualizarPlanilla(actualizar);
+                        actualizar.setHorasExtras(leerDouble(scanner));
+                        planillaService.actualizarPlanilla(actualizar);
                     } else {
                         System.out.println("Planilla no encontrada.");
                     }
                     break;
                 case 5:
                     System.out.print("ID de la planilla a eliminar: ");
-                    int idEliminar = scanner.nextInt();
-                    scanner.nextLine();
-                    planillaDAO.eliminarPlanilla(idEliminar);
+                    int idEliminar = leerEntero(scanner);
+                    planillaService.eliminarPlanilla(idEliminar);
                     break;
                 case 0:
                     volver = true;
                     break;
                 default:
                     System.out.println("Opción inválida.");
+            }
+        }
+    }
+
+    // Métodos auxiliares para evitar errores de input
+    private static int leerEntero(Scanner scanner) {
+        while (true) {
+            try {
+                int valor = Integer.parseInt(scanner.nextLine());
+                return valor;
+            } catch (NumberFormatException e) {
+                System.out.print("Ingrese un número válido: ");
+            }
+        }
+    }
+
+    private static double leerDouble(Scanner scanner) {
+        while (true) {
+            try {
+                double valor = Double.parseDouble(scanner.nextLine());
+                return valor;
+            } catch (NumberFormatException e) {
+                System.out.print("Ingrese un número válido: ");
             }
         }
     }
