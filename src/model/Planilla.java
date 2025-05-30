@@ -8,7 +8,7 @@ public class Planilla {
     private String mesPagado;
     private double salarioBruto;
     private double descuentoIGSS;
-    private double horasExtras;
+    private int horasExtras;
     private double salarioLiquido;
     private LocalDate fechaPago;
 
@@ -18,7 +18,7 @@ public class Planilla {
 
     // Constructor completo
     public Planilla(int idPlanilla, int idEmpleado, String mesPagado, double salarioBruto, double descuentoIGSS,
-                    double horasExtras, double salarioLiquido, LocalDate fechaPago) {
+                    int horasExtras, double salarioLiquido, LocalDate fechaPago) {
         this.idPlanilla = idPlanilla;
         this.idEmpleado = idEmpleado;
         this.mesPagado = mesPagado;
@@ -70,11 +70,11 @@ public class Planilla {
         this.descuentoIGSS = descuentoIGSS;
     }
 
-    public double getHorasExtras() {
+    public int getHorasExtras() {
         return horasExtras;
     }
 
-    public void setHorasExtras(double horasExtras) {
+    public void setHorasExtras(int horasExtras) {
         this.horasExtras = horasExtras;
     }
 

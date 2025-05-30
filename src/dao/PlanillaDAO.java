@@ -18,15 +18,11 @@ public class PlanillaDAO {
 
     // Agregar una nueva planilla
     public void agregarPlanilla(Planilla p) {
-        String sql = "INSERT INTO planillas (id_empleado, mes_pagado, salario_bruto, descuento_igss, horas_extras, salario_liquido, fecha_pago) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO planillas (id_empleado, mes_pagado, horas_extras) VALUES (?, ?, ?)";
         try (Connection conn = conectar(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, p.getIdEmpleado());
             ps.setString(2, p.getMesPagado());
-            ps.setDouble(3, p.getSalarioBruto());
-            ps.setDouble(4, p.getDescuentoIGSS());
-            ps.setDouble(5, p.getHorasExtras());
-            ps.setDouble(6, p.getSalarioLiquido());
-            ps.setDate(7, Date.valueOf(p.getFechaPago()));
+            ps.setInt(3, p.getHorasExtras());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,7 +43,7 @@ public class PlanillaDAO {
                     rs.getString("mes_pagado"),
                     rs.getDouble("salario_bruto"),
                     rs.getDouble("descuento_igss"),
-                    rs.getDouble("horas_extras"),
+                    rs.getInt("horas_extras"), // <-- CAMBIA AQUÍ
                     rs.getDouble("salario_liquido"),
                     rs.getDate("fecha_pago").toLocalDate()
                 );
@@ -60,16 +56,10 @@ public class PlanillaDAO {
 
     // Actualizar una planilla
     public void actualizarPlanilla(Planilla p) {
-        String sql = "UPDATE planillas SET id_empleado = ?, mes_pagado = ?, salario_bruto = ?, descuento_igss = ?, horas_extras = ?, salario_liquido = ?, fecha_pago = ? WHERE id_planilla = ?";
+        String sql = "UPDATE planillas SET horas_extras = ? WHERE id_planilla = ?";
         try (Connection conn = conectar(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, p.getIdEmpleado());
-            ps.setString(2, p.getMesPagado());
-            ps.setDouble(3, p.getSalarioBruto());
-            ps.setDouble(4, p.getDescuentoIGSS());
-            ps.setDouble(5, p.getHorasExtras());
-            ps.setDouble(6, p.getSalarioLiquido());
-            ps.setDate(7, Date.valueOf(p.getFechaPago()));
-            ps.setInt(8, p.getIdPlanilla());
+            ps.setInt(1, p.getHorasExtras());
+            ps.setInt(2, p.getIdPlanilla());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,7 +89,7 @@ public class PlanillaDAO {
                     rs.getString("mes_pagado"),
                     rs.getDouble("salario_bruto"),
                     rs.getDouble("descuento_igss"),
-                    rs.getDouble("horas_extras"),
+                    rs.getInt("horas_extras"), // <-- CAMBIA AQUÍ
                     rs.getDouble("salario_liquido"),
                     rs.getDate("fecha_pago").toLocalDate()
                 );
