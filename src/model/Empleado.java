@@ -103,17 +103,16 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado{" +
-                "idEmpleado=" + idEmpleado +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", correo='" + correo + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", fechaContratacion='" + fechaContratacion + '\'' +
-                ", salarioBase=" + salarioBase +
-                ", estado='" + estado + '\'' +
-                '}';
+        return  "----------------------------------------\n" +
+                "ID: " + idEmpleado + "\n" +
+                "Nombre: " + nombre + " " + apellido + "\n" +
+                "Dirección: " + direccion + "\n" +
+                "Correo: " + correo + "\n" +
+                "Teléfono: " + telefono + "\n" +
+                "Fecha de Contratación: " + fechaContratacion + "\n" +
+                "Salario Base: Q" + salarioBase + "\n" +
+                "Estado: " + estado + "\n" +
+                "----------------------------------------";
     }
 }
 

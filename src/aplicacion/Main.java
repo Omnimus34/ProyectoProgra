@@ -132,8 +132,21 @@ public class Main {
     private static void buscarEmpleado(EmpleadoService empleadoService, Scanner scanner) {
         System.out.print("ID del empleado: ");
         int idBuscar = leerEntero(scanner);
-        Empleado encontrado = empleadoService.buscarEmpleadoPorId(idBuscar);
-        System.out.println(encontrado != null ? encontrado : "No encontrado.");
+        Empleado e = empleadoService.buscarEmpleadoPorId(idBuscar);
+        if (e != null) {
+            System.out.println("\n======= DATOS DEL EMPLEADO =======");
+            System.out.println("ID: " + e.getIdEmpleado());
+            System.out.println("Nombre: " + e.getNombre() + " " + e.getApellido());
+            System.out.println("Dirección: " + e.getDireccion());
+            System.out.println("Correo: " + e.getCorreo());
+            System.out.println("Teléfono: " + e.getTelefono());
+            System.out.println("Fecha de Contratación: " + e.getFechaContratacion());
+            System.out.println("Salario Base: Q" + e.getSalarioBase());
+            System.out.println("Estado: " + e.getEstado());
+            System.out.println("==================================");
+        } else {
+            System.out.println("No encontrado.");
+        }
     }
 
     private static void buscarPlanilla(PlanillaService planillaService, Scanner scanner) {
