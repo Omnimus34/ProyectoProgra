@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         EmpleadoService empleadoService = new EmpleadoService();
         PlanillaService planillaService = new PlanillaService();
-        Scanner scanner = new Scanner(System.in);
+        Scanner Teclado = new Scanner(System.in);
         boolean salir = false;
 
         while (!salir) {
@@ -29,26 +29,26 @@ public class Main {
             System.out.println("8. Salir");
 
             System.out.print("Seleccione una opción: ");
-            int opcion = leerEntero(scanner);
+            int opcion = leerEntero(Teclado);
 
             switch (opcion) {
                 case 1:
-                    ingresarEmpleado(empleadoService, scanner);
+                    ingresarEmpleado(empleadoService, Teclado);
                     break;
                 case 2:
-                    ingresarPlanilla(planillaService, scanner);
+                    ingresarPlanilla(planillaService, Teclado);
                     break;
                 case 3:
-                    buscarEmpleado(empleadoService, scanner);
+                    buscarEmpleado(empleadoService, Teclado);
                     break;
                 case 4:
-                    buscarPlanilla(planillaService, scanner);
+                    buscarPlanilla(planillaService, Teclado);
                     break;
                 case 5:
-                    actualizarEmpleado(empleadoService, scanner);
+                    actualizarEmpleado(empleadoService, Teclado);
                     break;
                 case 6:
-                    eliminarEmpleado(empleadoService, scanner);
+                    eliminarEmpleado(empleadoService, Teclado);
                     break;
                 case 7:
                     reporteHistorial(empleadoService, planillaService);
@@ -60,7 +60,7 @@ public class Main {
                     System.out.println("Opción inválida.");
             }
         }
-        scanner.close();
+ 
     }
 
     private static void ingresarEmpleado(EmpleadoService empleadoService, Scanner scanner) {
