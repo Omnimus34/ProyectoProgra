@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        EmpleadoService empleadoService = new EmpleadoService();
-        PlanillaService planillaService = new PlanillaService();
+        EmpleadoService EmpServ = new EmpleadoService();
+        PlanillaService PlanServ = new PlanillaService();
         Scanner Teclado = new Scanner(System.in);
         boolean salir = false;
 
@@ -33,25 +33,25 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    ingresarEmpleado(empleadoService, Teclado);
+                    ingresarEmpleado(EmpServ, Teclado);
                     break;
                 case 2:
-                    ingresarPlanilla(planillaService, Teclado);
+                    ingresarPlanilla(PlanServ, Teclado);
                     break;
                 case 3:
-                    buscarEmpleado(empleadoService, Teclado);
+                    buscarEmpleado(EmpServ, Teclado);
                     break;
                 case 4:
-                    buscarPlanilla(planillaService, Teclado);
+                    buscarPlanilla(PlanServ, Teclado);
                     break;
                 case 5:
-                    actualizarEmpleado(empleadoService, Teclado);
+                    actualizarEmpleado(EmpServ, Teclado);
                     break;
                 case 6:
-                    eliminarEmpleado(empleadoService, Teclado);
+                    eliminarEmpleado(EmpServ, Teclado);
                     break;
                 case 7:
-                    reporteHistorial(empleadoService, planillaService);
+                    reporteHistorial(EmpServ, PlanServ);
                     break;
                  case 8:
                     salir = true;
