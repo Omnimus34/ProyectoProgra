@@ -63,36 +63,36 @@ public class Main {
  
     }
 
-    private static void ingresarEmpleado(EmpleadoService empleadoService, Scanner scanner) {
+    private static void ingresarEmpleado(EmpleadoService empleadoService, Scanner Teclado) {
         System.out.print("Nombre: ");
-        String nombre = scanner.nextLine();
+        String nombre = Teclado.nextLine();
         System.out.print("Apellido: ");
-        String apellido = scanner.nextLine();
+        String apellido = Teclado.nextLine();
         System.out.print("Dirección: ");
-        String direccion = scanner.nextLine();
+        String direccion = Teclado.nextLine();
         System.out.print("Correo: ");
-        String correo = scanner.nextLine();
+        String correo = Teclado.nextLine();
         if (!Utilidades.esCorreoValido(correo)) {
             System.out.println("Correo inválido.");
             return;
         }
         System.out.print("Teléfono: ");
-        String telefono = scanner.nextLine();
+        String telefono = Teclado.nextLine();
         if (!Utilidades.esTelefonoValido(telefono)) {
             System.out.println("Teléfono inválido.");
             return;
         }
         System.out.print("Fecha de contratación (YYYY-MM-DD): ");
-        String fechaStr = scanner.nextLine();
+        String fechaStr = Teclado.nextLine();
         LocalDate fecha = Utilidades.parseFecha(fechaStr);
         if (fecha == null) {
             System.out.println("Fecha inválida.");
             return;
         }
         System.out.print("Salario base: ");
-        double salario = leerDouble(scanner);
+        double salario = leerDouble(Teclado);
         System.out.print("Estado (Activo/Inactivo): ");
-        String estado = scanner.nextLine();
+        String estado = Teclado.nextLine();
         if (!estado.equals("Activo") && !estado.equals("Inactivo")) {
             System.out.println("Estado inválido.");
             return;
@@ -102,11 +102,11 @@ public class Main {
         System.out.println("Empleado ingresado correctamente.");
     }
 
-    private static void ingresarPlanilla(PlanillaService planillaService, Scanner scanner) {
+    private static void ingresarPlanilla(PlanillaService planillaService, Scanner Taclado) {
         System.out.print("ID Empleado: ");
-        int idEmp = leerEntero(scanner);
+        int idEmp = leerEntero(Taclado);
         System.out.print("Mes pagado (Enero, Febrero, ...): ");
-        String mes = scanner.nextLine();
+        String mes = Taclado.nextLine();
         String[] mesesValidos = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
         boolean mesValido = false;
         for (String m : mesesValidos) {
@@ -121,7 +121,7 @@ public class Main {
             return;
         }
         System.out.print("Horas extras: ");
-        int horas = leerEntero(scanner);
+        int horas = leerEntero(Taclado);
 
         // El trigger de la BD calcula el resto, así que los pasas como 0 o null
         Planilla planilla = new Planilla(0, idEmp, mes, 0, 0, horas, 0, null);
@@ -129,9 +129,9 @@ public class Main {
         System.out.println("Planilla ingresada correctamente.");
     }
 
-    private static void buscarEmpleado(EmpleadoService empleadoService, Scanner scanner) {
+    private static void buscarEmpleado(EmpleadoService empleadoService, Scanner Teclado) {
         System.out.print("ID del empleado: ");
-        int idBuscar = leerEntero(scanner);
+        int idBuscar = leerEntero(Teclado);
         Empleado e = empleadoService.buscarEmpleadoPorId(idBuscar);
         if (e != null) {
             System.out.println("\n======= DATOS DEL EMPLEADO =======");
@@ -149,20 +149,20 @@ public class Main {
         }
     }
 
-    private static void buscarPlanilla(PlanillaService planillaService, Scanner scanner) {
+    private static void buscarPlanilla(PlanillaService planillaService, Scanner Teclado) {
         System.out.print("ID de la planilla: ");
-        int idBuscar = leerEntero(scanner);
+        int idBuscar = leerEntero(Teclado);
         Planilla encontrada = planillaService.buscarPlanillaPorId(idBuscar);
         System.out.println(encontrada != null ? encontrada : "No encontrada.");
     }
 
-    private static void actualizarEmpleado(EmpleadoService empleadoService, Scanner scanner) {
+    private static void actualizarEmpleado(EmpleadoService empleadoService, Scanner Teclado) {
         System.out.print("ID del empleado a actualizar: ");
-        int idActualizar = leerEntero(scanner);
+        int idActualizar = leerEntero(Teclado);
         Empleado actualizar = empleadoService.buscarEmpleadoPorId(idActualizar);
         if (actualizar != null) {
             System.out.print("Nuevo correo: ");
-            String nuevoCorreo = scanner.nextLine();
+            String nuevoCorreo = Teclado.nextLine();
             if (!Utilidades.esCorreoValido(nuevoCorreo)) {
                 System.out.println("Correo inválido.");
                 return;
@@ -175,9 +175,9 @@ public class Main {
         }
     }
 
-    private static void eliminarEmpleado(EmpleadoService empleadoService, Scanner scanner) {
+    private static void eliminarEmpleado(EmpleadoService empleadoService, Scanner Teclado) {
         System.out.print("ID del empleado a eliminar: ");
-        int idEliminar = leerEntero(scanner);
+        int idEliminar = leerEntero(Teclado);
         empleadoService.eliminarEmpleado(idEliminar);
         System.out.println("Empleado eliminado correctamente (si existía).");
     }
@@ -189,10 +189,10 @@ public class Main {
     }
 
     // Métodos auxiliares para evitar errores de input
-    private static int leerEntero(Scanner scanner) {
+    private static int leerEntero(Scanner Teclado) {
         while (true) {
             try {
-                int valor = Integer.parseInt(scanner.nextLine());
+                int valor = Integer.parseInt(Teclado.nextLine());
                 return valor;
             } catch (NumberFormatException e) {
                 System.out.print("Ingrese un número válido: ");
@@ -200,10 +200,10 @@ public class Main {
         }
     }
 
-    private static double leerDouble(Scanner scanner) {
+    private static double leerDouble(Scanner Teclado) {
         while (true) {
             try {
-                double valor = Double.parseDouble(scanner.nextLine());
+                double valor = Double.parseDouble(Teclado.nextLine());
                 return valor;
             } catch (NumberFormatException e) {
                 System.out.print("Ingrese un número válido: ");
