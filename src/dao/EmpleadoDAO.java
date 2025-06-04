@@ -8,9 +8,9 @@ import model.Empleado;
 public class EmpleadoDAO {
 
     // Datos de conexión
-    private final String URL = "jdbc:mysql://sql3.freesqldatabase.com:3306/sql3779319";
-    private final String USER = "sql3779319";
-    private final String PASSWORD = "rWcND2pFSf";
+    private final String URL = "jdbc:mysql://localhost:3306/sys";
+    private final String USER = "root";
+    private final String PASSWORD = "77954004";
     
 
     private Connection conectar() throws SQLException {

@@ -21,13 +21,22 @@ public class Reportes {
     }
 
     public static void imprimirHistorialSalarios(List<Empleado> empleados, List<Planilla> planillas) {
-        System.out.println("=== HISTORIAL DE SALARIOS POR EMPLEADO ===");
+        System.out.println("\n=== REPORTE DE EMPLEADOS Y SU HISTORIAL DE SALARIOS ===");
+        System.out.println("Total empleados: " + empleados.size());
+        System.out.println("Total planillas: " + planillas.size());
+        System.out.println();
+
         for (Empleado e : empleados) {
-            System.out.println("Empleado: " + e.getNombre() + " " + e.getApellido());
+            System.out.println("Empleado: " + e.getNombre() + " " + e.getApellido() + " (ID: " + e.getIdEmpleado() + ")");
+            boolean tienePlanillas = false;
             for (Planilla p : planillas) {
                 if (p.getIdEmpleado() == e.getIdEmpleado()) {
                     System.out.println("  Mes: " + p.getMesPagado() + " | Salario Líquido: " + p.getSalarioLiquido());
+                    tienePlanillas = true;
                 }
+            }
+            if (!tienePlanillas) {
+                System.out.println("  Sin historial de salarios.");
             }
             System.out.println();
         }

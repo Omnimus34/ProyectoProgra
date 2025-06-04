@@ -13,7 +13,9 @@ public class Empleado {
     private double salarioBase;
     private String estado;
 
-    public Empleado() {}
+    public Empleado() {
+        
+    }
 
     public Empleado(int idEmpleado, String nombre, String apellido, String direccion, String correo, String telefono,
                     LocalDate fechaContratacion, double salarioBase, String estado) {
