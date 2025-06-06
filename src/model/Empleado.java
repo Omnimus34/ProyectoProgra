@@ -1,120 +1,71 @@
 package model;
 
-import java.time.LocalDate;
-
 public class Empleado {
-    private int idEmpleado;
-    private String nombre;
-    private String apellido;
-    private String direccion;
-    private String correo;
-    private String telefono;
-    private LocalDate fechaContratacion;
-    private double salarioBase;
-    private String estado;
+    
+    int IdEmpleado;
+    String Nombre;
+    String Apellido;
+    String Direccion;
+    String Email;
+    int Telefono;
 
     public Empleado() {
-        
     }
 
-    public Empleado(int idEmpleado, String nombre, String apellido, String direccion, String correo, String telefono,
-                    LocalDate fechaContratacion, double salarioBase, String estado) {
-        this.idEmpleado = idEmpleado;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.correo = correo;
-        this.telefono = telefono;
-        this.fechaContratacion = fechaContratacion;
-        this.salarioBase = salarioBase;
-        this.estado = estado;
+    public Empleado(int IdEmpleado, String Nombre, String Apellido, String Direccion, String Email, int Telefono) {
+        this.IdEmpleado = IdEmpleado;
+        this.Nombre = Nombre;
+        this.Apellido = Apellido;
+        this.Direccion = Direccion;
+        this.Email = Email;
+        this.Telefono = Telefono;
     }
 
-    // Getters y Setters
     public int getIdEmpleado() {
-        return idEmpleado;
+        return IdEmpleado;
     }
 
-    public void setIdEmpleado(int idEmpleado) {
-        this.idEmpleado = idEmpleado;
+    public void setIdEmpleado(int IdEmpleado) {
+        this.IdEmpleado = IdEmpleado;
     }
 
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
     public String getApellido() {
-        return apellido;
+        return Apellido;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellido(String Apellido) {
+        this.Apellido = Apellido;
     }
 
     public String getDireccion() {
-        return direccion;
+        return Direccion;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDireccion(String Direccion) {
+        this.Direccion = Direccion;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return Email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public int getTelefono() {
+        return Telefono;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public LocalDate getFechaContratacion() {
-        return fechaContratacion;
-    }
-
-    public void setFechaContratacion(LocalDate fechaContratacion) {
-        this.fechaContratacion = fechaContratacion;
-    }
-
-    public double getSalarioBase() {
-        return salarioBase;
-    }
-
-    public void setSalarioBase(double salarioBase) {
-        this.salarioBase = salarioBase;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    @Override
-    public String toString() {
-        return  "----------------------------------------\n" +
-                "ID: " + idEmpleado + "\n" +
-                "Nombre: " + nombre + " " + apellido + "\n" +
-                "Dirección: " + direccion + "\n" +
-                "Correo: " + correo + "\n" +
-                "Teléfono: " + telefono + "\n" +
-                "Fecha de Contratación: " + fechaContratacion + "\n" +
-                "Salario Base: Q" + salarioBase + "\n" +
-                "Estado: " + estado + "\n" +
-                "----------------------------------------";
+    public void setTelefono(int Telefono) {
+        this.Telefono = Telefono;
     }
 }
-

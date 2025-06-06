@@ -1,110 +1,85 @@
 package model;
 
-import java.time.LocalDate;
+import java.util.Date;
+
 
 public class Planilla {
-    private int idPlanilla;
-    private int idEmpleado;
-    private String mesPagado;
-    private double salarioBruto;
-    private double descuentoIGSS;
-    private int horasExtras;
-    private double salarioLiquido;
-    private LocalDate fechaPago;
+    
+    int ID;
+    int IdEmpleado;
+    String MesPagado;
+    double Salario;
+    double DescuentoIgss;
+    int HorasExtra;
+    double SalarioLiquido;
 
-    // Constructor vacío
     public Planilla() {
     }
 
-    // Constructor completo
-    public Planilla(int idPlanilla, int idEmpleado, String mesPagado, double salarioBruto, double descuentoIGSS,
-                    int horasExtras, double salarioLiquido, LocalDate fechaPago) {
-        this.idPlanilla = idPlanilla;
-        this.idEmpleado = idEmpleado;
-        this.mesPagado = mesPagado;
-        this.salarioBruto = salarioBruto;
-        this.descuentoIGSS = descuentoIGSS;
-        this.horasExtras = horasExtras;
-        this.salarioLiquido = salarioLiquido;
-        this.fechaPago = fechaPago;
+    public Planilla(int ID, int IdEmpleado, String MesPagado, double Salario, double DescuentoIgss, int HorasExtra, double SalarioLiquido) {
+        this.ID = ID;
+        this.IdEmpleado = IdEmpleado;
+        this.MesPagado = MesPagado;
+        this.Salario = Salario;
+        this.DescuentoIgss = DescuentoIgss;
+        this.HorasExtra = HorasExtra;
+        this.SalarioLiquido = SalarioLiquido;
     }
 
-    // Getters y Setters
-    public int getIdPlanilla() {
-        return idPlanilla;
+    public int getID() {
+        return ID;
     }
 
-    public void setIdPlanilla(int idPlanilla) {
-        this.idPlanilla = idPlanilla;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public int getIdEmpleado() {
-        return idEmpleado;
+        return IdEmpleado;
     }
 
-    public void setIdEmpleado(int idEmpleado) {
-        this.idEmpleado = idEmpleado;
+    public void setIdEmpleado(int IdEmpleado) {
+        this.IdEmpleado = IdEmpleado;
     }
 
     public String getMesPagado() {
-        return mesPagado;
+        return MesPagado;
     }
 
-    public void setMesPagado(String mesPagado) {
-        this.mesPagado = mesPagado;
+    public void setMesPagado(String MesPagado) {
+        this.MesPagado = MesPagado;
     }
 
-    public double getSalarioBruto() {
-        return salarioBruto;
+    public double getSalario() {
+        return Salario;
     }
 
-    public void setSalarioBruto(double salarioBruto) {
-        this.salarioBruto = salarioBruto;
+    public void setSalario(double Salario) {
+        this.Salario = Salario;
     }
 
-    public double getDescuentoIGSS() {
-        return descuentoIGSS;
+    public double getDescuentoIgss() {
+        return DescuentoIgss;
     }
 
-    public void setDescuentoIGSS(double descuentoIGSS) {
-        this.descuentoIGSS = descuentoIGSS;
+    public void setDescuentoIgss(double DescuentoIgss) {
+        this.DescuentoIgss = DescuentoIgss;
     }
 
-    public int getHorasExtras() {
-        return horasExtras;
+    public int getHorasExtra() {
+        return HorasExtra;
     }
 
-    public void setHorasExtras(int horasExtras) {
-        this.horasExtras = horasExtras;
+    public void setHorasExtra(int HorasExtra) {
+        this.HorasExtra = HorasExtra;
     }
 
     public double getSalarioLiquido() {
-        return salarioLiquido;
+        return SalarioLiquido;
     }
 
-    public void setSalarioLiquido(double salarioLiquido) {
-        this.salarioLiquido = salarioLiquido;
+    public void setSalarioLiquido(double SalarioLiquido) {
+        this.SalarioLiquido = SalarioLiquido;
     }
 
-    public LocalDate getFechaPago() {
-        return fechaPago;
-    }
-
-    public void setFechaPago(LocalDate fechaPago) {
-        this.fechaPago = fechaPago;
-    }
-
-    @Override
-    public String toString() {
-        return "Planilla{" +
-                "idPlanilla=" + idPlanilla +
-                ", idEmpleado=" + idEmpleado +
-                ", mesPagado='" + mesPagado + '\'' +
-                ", salarioBruto=" + salarioBruto +
-                ", descuentoIGSS=" + descuentoIGSS +
-                ", horasExtras=" + horasExtras +
-                ", salarioLiquido=" + salarioLiquido +
-                ", fechaPago=" + fechaPago +
-                '}';
-    }
 }

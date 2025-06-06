@@ -3,6 +3,13 @@
   "configurations": [
     {
         "type": "java",
+        "name": "DistribuidoraGarcia",
+        "request": "launch",
+        "mainClass": "distribuidoragarcia.DistribuidoraGarcia",
+        "projectName": "ProyectoProgra_ebe1c8f7"
+    },
+    {
+        "type": "java",
         "name": "Main",
         "request": "launch",
         "mainClass": "aplicacion.Main",
