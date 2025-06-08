@@ -12,7 +12,8 @@ public class PlanillaService {
     Scanner Input = new Scanner(System.in);
     PlanillaBD PlaBD = new PlanillaBD();
     EmpleadoBD EmpBD = new EmpleadoBD();
-    
+
+    /* Este metodo permite ingresar una nueva planilla */
     public void IngresarPlanilla()
     {
         System.out.println("Ingrese cantidad de planillas");
@@ -64,6 +65,7 @@ public class PlanillaService {
         } 
     }
     
+    /* Este metodo nos muestra la informacion indivual de un ID*/
     public void BuscarPlanillaId()
     {
         System.out.println("Ingrese ID del Empleado");
@@ -90,7 +92,8 @@ public class PlanillaService {
             System.out.println("No se encontró planilla con ese ID.");
         }
     }
-    
+
+    /* Este metodo nos retorna toda la informacion de las planillas */
     public void MostrarReportePlanillas() 
     {
     List<Planilla> lista = PlaBD.Reportes();
@@ -113,8 +116,6 @@ public class PlanillaService {
             p.getHorasExtra(),
             p.getSalarioLiquido());
     }
-
     System.out.println("===============================================================");
 }
-
 }

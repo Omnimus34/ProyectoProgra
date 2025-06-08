@@ -9,6 +9,7 @@ public class EmpleadoService {
     Scanner Input = new Scanner(System.in);
     EmpleadoBD EmpBD = new EmpleadoBD();
     
+    /* En este metodo simplemente estamos ingresando nuevos empleados */
     public void IngresarEmpleado(){
         
         System.out.println("Ingrese cantidad de empleados nuevos");
@@ -43,6 +44,7 @@ public class EmpleadoService {
         } 
     }
     
+    /* En este metodo ingreamos un ID y nos retorna la informacion del empleado*/
     public void BuscarEmpleadoId()
     {
         System.out.println("Ingrese ID del Empleado");
@@ -66,6 +68,8 @@ public class EmpleadoService {
         }
         
     }
+
+    /* En este metodo simplemente buscamos un ID y cambiamos los datos requeridos*/
     public void ActualizarEmpleado() 
     {
     System.out.println("Ingrese ID del Empleado");
@@ -107,15 +111,17 @@ public class EmpleadoService {
     } else {
         System.out.println("Empleado no encontrado.");
     }
-}
+    }
+
+    /* En este metodod ingremos un ID y este borra la informacion relacionada*/
     public void EliminarEmpleado()
     {
         System.out.println("Ingrese ID del Empleado");
         int idEliminar = Input.nextInt();
         
         boolean eliminar = EmpBD.EliminarEmpleado(idEliminar);
-        
-        if(eliminar)
+
+        if (eliminar)
         {
             System.out.println("Se elimino con exito");
         }

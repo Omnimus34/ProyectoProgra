@@ -5,15 +5,18 @@ import model.Empleado;
 
 public class EmpleadoBD {
  
+    /*Estos son los datos que utiliza el driver, para conectarse a la BD, estos datos ps van a variar*/
     private final String URL = "jdbc:mysql://localhost:3306/sys";
     private final String USER = "root";
     private final String PASSWORD = "77954004";
-    
-    public Connection Con() throws SQLException{
-        return DriverManager.getConnection(URL,USER,PASSWORD); 
+
+    /* Aqui simplemente le estamos diciendo que queremos conectarnos a la BD  con los datos de arriba y que si los datos son correctos por se conecta*/
+    public Connection Con() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
-    
-    public int NuevoEmpleado(Empleado Emp){
+
+    /* Aqui tomamos los datos del empleado y los insertamos en la base de datos */
+    public int NuevoEmpleado(Empleado Emp) {
         String sql = "INSERT INTO empleados (nombre, apellido, direccion, correo, telefono) VALUES (?, ?, ?, ?, ?) ";
         try(Connection conn = Con(); 
                 PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
@@ -39,6 +42,7 @@ public class EmpleadoBD {
         return -1;
     }
     
+    /* Este metodo busca un empleado por su ID, si lo encuentra devuelve un objeto Empleado, si no lo encuentra devuelve null */
     public Empleado BuscarEmpleadoId(int id)
     {
         String sql = "SELECT * FROM empleados WHERE id_empleado = ?";
@@ -66,11 +70,11 @@ public class EmpleadoBD {
         }
         return Emp;
     }
-    
+    /* Este metodo actualiza un empleado en la base de datos */
     public void ActualizarEmpleadoBD(Empleado Emp)
     {
-        String sql = "UPDATE empleados SET nombre= ?, apellido = ?, direccion = ? correo = ?, telefono = ? WHERE id_empleado = ?";
-        try(Connection conn = Con(); 
+        String sql = "UPDATE empleados SET nombre= ?, apellido = ?, direccion = ?, correo = ?, telefono = ? WHERE id_empleado = ?";
+        try(Connection conn = Con();
                 PreparedStatement ps = conn.prepareStatement(sql))
         {
             ps.setString(1, Emp.getNombre());
@@ -86,7 +90,8 @@ public class EmpleadoBD {
             e.printStackTrace();
         }
     }
-    
+
+    /*Este metodo elimina un empleado de la base de datos */
     public boolean EliminarEmpleado(int id)
     {
         String sql = "DELETE  FROM empleados WHERE id_empleado = ?";
