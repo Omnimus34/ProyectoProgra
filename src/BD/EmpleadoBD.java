@@ -6,9 +6,9 @@ import model.Empleado;
 public class EmpleadoBD {
  
     /*Estos son los datos que utiliza el driver, para conectarse a la BD, estos datos ps van a variar*/
-    private final String URL = "jdbc:mysql://localhost:3306/sys";
-    private final String USER = "root";
-    private final String PASSWORD = "77954004";
+    private final String URL = "jdbc:mysql://sql3.freesqldatabase.com:3306/sql3784091";
+    private final String USER = "sql3784091";
+    private final String PASSWORD = "MBdR5MuHTh";
 
     /* Aqui simplemente le estamos diciendo que queremos conectarnos a la BD  con los datos de arriba y que si los datos son correctos por se conecta*/
     public Connection Con() throws SQLException {
@@ -109,4 +109,3 @@ public class EmpleadoBD {
         }
     }
 }
-    

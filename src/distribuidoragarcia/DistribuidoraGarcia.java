@@ -47,6 +47,7 @@ public class DistribuidoraGarcia {
                 case 7: PlaSe.MostrarReportePlanillas();
                 break;
                 case 8: Salir = true;
+                System.out.println("Gracias por usar el sistema");
                 break;
                     
             }

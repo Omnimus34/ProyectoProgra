@@ -9,15 +9,15 @@ import model.Planilla;
 public class PlanillaBD {
 
     /* Estos son los datos que utiliza el driver, para conectarse a la BD, estos datos ps van a variar */
-    static String URL = "jdbc:mysql://localhost:3306/sys";
-    static String USER = "root";
-    static String PASSWORD = "77954004";
+    static String URL = "jdbc:mysql://sql3.freesqldatabase.com:3306/sql3784091";
+    static String USER = "sql3784091";
+    static String PASSWORD = "MBdR5MuHTh";
 
     private Connection Con() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
     
-    /* Este metodo inserta la informacion tomada en PlanillaService en la BD*/
+    /* Este metodo inserta la informacion tomada in PlanillaService en la BD*/
     public int EmpleadoPlanilla(Planilla Pla)
     {
         String sql = "INSERT INTO planillas (id_empleado, mes_pagado, salario_bruto, descuento_igss, horas_extras, salario_liquido) VALUES(?, ?, ?, ?, ?, ?)";

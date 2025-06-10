@@ -56,7 +56,6 @@ public class PlanillaService {
                 {
                     System.out.println("Error con la Base de Datos");
                 }
-                PlaBD.EmpleadoPlanilla(Pla);
             }
             else
             {
