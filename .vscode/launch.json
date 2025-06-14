@@ -6,6 +6,13 @@
         "name": "DistribuidoraGarcia",
         "request": "launch",
         "mainClass": "distribuidoragarcia.DistribuidoraGarcia",
+        "projectName": "ProyectoProgra_349a866e"
+    },
+    {
+        "type": "java",
+        "name": "DistribuidoraGarcia",
+        "request": "launch",
+        "mainClass": "distribuidoragarcia.DistribuidoraGarcia",
         "projectName": "ProyectoProgra_ebe1c8f7"
     },
     {
