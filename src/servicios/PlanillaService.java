@@ -1,11 +1,11 @@
 package servicios;
 
+import BD.EmpleadoBD;
 import BD.PlanillaBD;
+import java.util.List;
 import java.util.Scanner;
 import model.Empleado;
 import model.Planilla;
-import BD.EmpleadoBD;
-import java.util.List;
 
 public class PlanillaService {
     
@@ -67,7 +67,7 @@ public class PlanillaService {
     /* Este metodo nos muestra la informacion indivual de un ID*/
     public void BuscarPlanillaId()
     {
-        System.out.println("Ingrese ID del Empleado");
+        System.out.println("Ingrese ID de Empleado de la Planilla");
         int idBuscar = Input.nextInt();
         
         Planilla Pla = PlaBD.BuscarIdPlanilla(idBuscar);
