@@ -14,7 +14,7 @@ public class EmpleadoBD {
     public Connection Con() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
-
+    
     /* Aqui tomamos los datos del empleado y los insertamos en la base de datos */
     public int NuevoEmpleado(Empleado Emp) {
         String sql = "INSERT INTO empleados (nombre, apellido, direccion, correo, telefono) VALUES (?, ?, ?, ?, ?) ";
